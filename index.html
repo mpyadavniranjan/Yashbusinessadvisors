@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>Yash Business Advisors</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dark: #A07830;
+    --dark: #0A0A0A;
+    --dark-2: #141414;
+    --dark-3: #1E1E1E;
+    --dark-4: #2A2A2A;
+    --white: #FFFFFF;
+    --white-80: rgba(255,255,255,0.8);
+    --white-50: rgba(255,255,255,0.5);
+    --white-15: rgba(255,255,255,0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    max-width: 430px;
+    margin: 0 auto;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--dark);
+    padding: 20px 20px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    backdrop-filter: blur(12px);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding-bottom: 16px;
+  }
+
+  .logo-wrap img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: #000;
+    border: 2px solid var(--gold);
+    padding: 3px;
+  }
+
+  .brand-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: 2px;
+    line-height: 1.1;
+  }
+
+  .brand-text p {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 2px;
+    font-weight: 500;
+  }
+
+  /* ── NAV PILLS ── */
+  nav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 12px 20px;
+    scrollbar-width: none;
+    background: var(--dark-2);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  nav::-webkit-scrollbar { display: none; }
+
+  nav a {
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--white-80);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(201,168,76,0.2);
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  nav a:hover, nav a.active {
+    background: var(--gold);
+    color: var(--dark);
+    border-color: var(--gold);
+  }
+
+  /* ── HERO ── */
+  #home {
+    background: linear-gradient(160deg, #0A0A0A 0%, #1a1200 50%, #0A0A0A 100%);
+    padding: 40px 24px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #home::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.4);
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  #home h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 14px;
+    color: var(--white);
+  }
+
+  #home h2 span {
+    color: var(--gold);
+  }
+
+  #home p.sub {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--white-80);
+    margin-bottom: 30px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--dark);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 13px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    border: none;
+    letter-spacing: 0.3px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,168,76,0.45); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 50px;
+    text-decoration: none;
+    border: 1.5px solid var(--gold);
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { background: rgba(201,168,76,0.1); }
+
+  /* ── STATS ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(201,168,76,0.15);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .stat-item {
+    background: var(--dark-2);
+    padding: 18px 10px;
+    text-align: center;
+  }
+
+  .stat-item strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .stat-item span {
+    font-size: 10px;
+    color: var(--white-50);
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* ── SECTIONS COMMON ── */
+  section {
+    padding: 40px 20px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+
+  .section-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--white-80);
+    margin-bottom: 28px;
+  }
+
+  /* ── SERVICES ── */
+  #services { background: var(--dark-2); }
+
+  .services-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .service-card {
+    background: var(--dark-3);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .service-card:hover { border-color: rgba(201,168,76,0.4); transform: translateX(4px); }
+  .service-card:hover::before { opacity: 1; }
+
+  .svc-icon {
+    width: 46px;
+    height: 46px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.05));
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .svc-body h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 5px;
+    line-height: 1.3;
+  }
+
+  .svc-body p {
+    font-size: 12px;
+    color: var(--white-50);
+    line-height: 1.6;
+  }
+
+  .svc-arrow {
+    margin-left: auto;
+    color: var(--gold);
+    font-size: 16px;
+    align-self: center;
+    flex-shrink: 0;
+  }
+
+  /* ── WHY US ── */
+  #about { background: var(--dark); }
+
+  .why-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .why-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    background: var(--dark-3);
+    border-radius: 12px;
+    border-left: 3px solid var(--gold);
+  }
+
+  .why-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .why-item p {
+    font-size: 13px;
+    color: var(--white-80);
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  /* ── TESTIMONIAL ── */
+  #testimonials { background: var(--dark-2); }
+
+  .testimonial-card {
+    background: var(--dark-3);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 14px;
+    position: relative;
+  }
+
+  .testimonial-card::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    color: var(--gold);
+    opacity: 0.2;
+    position: absolute;
+    top: -5px;
+    left: 16px;
+    line-height: 1;
+  }
+
+  .testimonial-card p {
+    font-size: 13px;
+    color: var(--white-80);
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 14px;
+    padding-top: 20px;
+  }
+
+  .t-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .t-avatar {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--dark);
+  }
+
+  .t-info strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .t-info span {
+    font-size: 11px;
+    color: var(--white-50);
+  }
+
+  .stars { color: var(--gold); font-size: 12px; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--dark); }
+
+  .contact-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    background: var(--dark-3);
+    border-radius: 14px;
+    border: 1px solid rgba(201,168,76,0.1);
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+
+  .contact-item:hover { border-color: rgba(201,168,76,0.4); transform: translateX(4px); }
+
+  .contact-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .ci-phone { background: rgba(74,144,226,0.15); border: 1px solid rgba(74,144,226,0.3); }
+  .ci-wa { background: rgba(37,211,102,0.15); border: 1px solid rgba(37,211,102,0.3); }
+  .ci-mail { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); }
+  .ci-map { background: rgba(234,67,53,0.15); border: 1px solid rgba(234,67,53,0.3); }
+  .ci-addr { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); }
+
+  .contact-text strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+
+  .contact-text span {
+    font-size: 12px;
+    color: var(--white-50);
+  }
+
+  .ci-arrow { margin-left: auto; color: var(--gold); font-size: 14px; flex-shrink: 0; }
+
+  /* ── MAP EMBED ── */
+  .map-wrap {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.2);
+    margin-top: 8px;
+  }
+
+  .map-wrap iframe {
+    width: 100%;
+    height: 200px;
+    border: 0;
+    display: block;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark-2);
+    padding: 28px 20px 40px;
+    text-align: center;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+
+  footer .logo-small {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  footer .tagline {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  footer p.copy {
+    font-size: 11px;
+    color: var(--white-50);
+    margin-top: 16px;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 16px;
+  }
+
+  .footer-links a {
+    font-size: 11px;
+    color: var(--white-50);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── FLOATING WA BUTTON ── */
+  .fab-wa {
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    text-decoration: none;
+    font-size: 26px;
+    z-index: 200;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .fab-wa:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.55); }
+
+  /* ── DIVIDER ── */
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.3;
+    margin: 0 20px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <img src="/mnt/user-data/uploads/Logo_-_Copy.png" alt="Yash Business Advisors Logo" />
+    </div>
+    <div class="brand-text">
+      <h1>YASH</h1>
+      <p>Business Advisors</p>
+    </div>
+  </div>
+  <nav>
+    <a href="#home" class="active">Home</a>
+    <a href="#services">Services</a>
+    <a href="#about">Why Us</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-badge">✦ Trusted Financial Partner</div>
+  <h2>Your Growth,<br/><span>Our Expertise</span></h2>
+  <p class="sub">Comprehensive business advisory & compliance solutions tailored for growing businesses in Hyderabad.</p>
+  <div class="hero-cta">
+    <a href="https://wa.me/917981248628" class="btn-primary">💬 WhatsApp Us</a>
+    <a href="#services" class="btn-outline">Our Services</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-item">
+    <strong>500+</strong>
+    <span>Clients Served</span>
+  </div>
+  <div class="stat-item">
+    <strong>10+</strong>
+    <span>Years Experience</span>
+  </div>
+  <div class="stat-item">
+    <strong>100%</strong>
+    <span>Compliance</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <p class="section-label">What We Offer</p>
+  <h2 class="section-title">Professional Services</h2>
+  <p class="section-desc">End-to-end business solutions from registration to compliance, managed by expert professionals.</p>
+
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="svc-icon">🏛️</div>
+      <div class="svc-body">
+        <h3>Business Registration</h3>
+        <p>Company incorporation, LLP, partnership, sole proprietorship & all registrations handled seamlessly.</p>
+      </div>
+      <span class="svc-arrow">›</span>
+    </div>
+
+    <div class="service-card">
+      <div class="svc-icon">📒</div>
+      <div class="svc-body">
+        <h3>Accounting & Bookkeeping</h3>
+        <p>Accurate financial records, ledger management & MIS reports to keep your finances in order.</p>
+      </div>
+      <span class="svc-arrow">›</span>
+    </div>
+
+    <div class="service-card">
+      <div class="svc-icon">💼</div>
+      <div class="svc-body">
+        <h3>Payroll Management</h3>
+        <p>End-to-end payroll processing, salary structuring, TDS calculations & payslip generation.</p>
+      </div>
+      <span class="svc-arrow">›</span>
+    </div>
+
+    <div class="service-card">
+      <div class="svc-icon">📊</div>
+      <div class="svc-body">
+        <h3>GST Consultancy</h3>
+        <p>GST registration, monthly/quarterly return filing, reconciliation & advisory services.</p>
+      </div>
+      <span class="svc-arrow">›</span>
+    </div>
+
+    <div class="service-card">
+      <div class="svc-icon">🧾</div>
+      <div class="svc-body">
+        <h3>Income Tax Consultancy</h3>
+        <p>IT returns, tax planning, advance tax, TDS compliance & notices handling for individuals & businesses.</p>
+      </div>
+      <span class="svc-arrow">›</span>
+    </div>
+
+    <div class="service-card">
+      <div class="svc-icon">🔍</div>
+      <div class="svc-body">
+        <h3>Auditing & Assurance</h3>
+        <p>Statutory audit, internal audit, tax audit & assurance services ensuring transparency.</p>
+      </div>
+      <span class="svc-arrow">›</span>
+    </div>
+
+    <div class="service-card">
+      <div class="svc-icon">📈</div>
+      <div class="svc-body">
+        <h3>Virtual CFO Services</h3>
+        <p>Strategic financial planning, budgeting, cash flow management & investor-ready reporting.</p>
+      </div>
+      <span class="svc-arrow">›</span>
+    </div>
+
+    <div class="service-card">
+      <div class="svc-icon">🛡️</div>
+      <div class="svc-body">
+        <h3>PF & ESI Returns</h3>
+        <p>Provident Fund, ESI registration, monthly remittances & compliance filings handled expertly.</p>
+      </div>
+      <span class="svc-arrow">›</span>
+    </div>
+
+    <div class="service-card">
+      <div class="svc-icon">⚙️</div>
+      <div class="svc-body">
+        <h3>Other Professional Services</h3>
+        <p>MSME registration, Udyam, Trade license, FSSAI, ROC filings & more customised solutions.</p>
+      </div>
+      <span class="svc-arrow">›</span>
+    </div>
+
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- WHY US -->
+<section id="about">
+  <p class="section-label">Why Choose Us</p>
+  <h2 class="section-title">Trusted Advisors,<br/>Real Results</h2>
+  <p class="section-desc">We bring expertise, integrity & personalised attention to every client relationship.</p>
+
+  <div class="why-list">
+    <div class="why-item">
+      <span class="why-icon">🎯</span>
+      <p>Dedicated relationship manager for personalised advisory and proactive compliance reminders.</p>
+    </div>
+    <div class="why-item">
+      <span class="why-icon">⚡</span>
+      <p>Fast turnaround times — we respect your deadlines so you never miss a filing date.</p>
+    </div>
+    <div class="why-item">
+      <span class="why-icon">🔒</span>
+      <p>100% data confidentiality with secure handling of all financial and business documents.</p>
+    </div>
+    <div class="why-item">
+      <span class="why-icon">💡</span>
+      <p>Proactive tax-saving strategies and business growth advisory — beyond just compliance.</p>
+    </div>
+    <div class="why-item">
+      <span class="why-icon">🌐</span>
+      <p>Hyderabad-based team with deep knowledge of local regulations, state-specific GST & more.</p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <p class="section-label">Client Reviews</p>
+  <h2 class="section-title">What Our Clients Say</h2>
+
+  <div class="testimonial-card">
+    <p>Yash Business Advisors have been managing our GST and payroll for over 3 years. Extremely professional, always on time and very responsive. Highly recommended!</p>
+    <div class="t-author">
+      <div class="t-avatar">RK</div>
+      <div class="t-info">
+        <strong>Rajesh Kumar</strong>
+        <span>Director, Manufacturing Co.</span>
+      </div>
+      <div class="stars" style="margin-left:auto">★★★★★</div>
+    </div>
+  </div>
+
+  <div class="testimonial-card">
+    <p>From company registration to Income Tax filing — they handled everything smoothly. The Virtual CFO service gave our startup the financial clarity we needed to grow.</p>
+    <div class="t-author">
+      <div class="t-avatar">PS</div>
+      <div class="t-info">
+        <strong>Priya Sharma</strong>
+        <span>Founder, Tech Startup</span>
+      </div>
+      <div class="stars" style="margin-left:auto">★★★★★</div>
+    </div>
+  </div>
+
+  <div class="testimonial-card">
+    <p>Their expertise in GST reconciliation saved us significant penalties. The team is knowledgeable, honest, and always available for queries. Best advisors in Hyderabad!</p>
+    <div class="t-author">
+      <div class="t-avatar">AM</div>
+      <div class="t-info">
+        <strong>Anil Mehta</strong>
+        <span>Proprietor, Trading Firm</span>
+      </div>
+      <div class="stars" style="margin-left:auto">★★★★★</div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Get In Touch</p>
+  <h2 class="section-title">Reach Us Anytime</h2>
+  <p class="section-desc">We are just a call or message away. Reach out to us for a free initial consultation.</p>
+
+  <div class="contact-cards">
+
+    <a href="tel:+917981130778" class="contact-item">
+      <div class="contact-icon ci-phone">📞</div>
+      <div class="contact-text">
+        <strong>+91 79811 30778</strong>
+        <span>Call us directly</span>
+      </div>
+      <span class="ci-arrow">›</span>
+    </a>
+
+    <a href="https://wa.me/917981248628" target="_blank" class="contact-item">
+      <div class="contact-icon ci-wa">💬</div>
+      <div class="contact-text">
+        <strong>+91 79812 48628</strong>
+        <span>Chat on WhatsApp</span>
+      </div>
+      <span class="ci-arrow">›</span>
+    </a>
+
+    <a href="mailto:yashbusinessadvisors@gmail.com" class="contact-item">
+      <div class="contact-icon ci-mail">✉️</div>
+      <div class="contact-text">
+        <strong>yashbusinessadvisors</strong>
+        <span>@gmail.com</span>
+      </div>
+      <span class="ci-arrow">›</span>
+    </a>
+
+    <a href="https://maps.google.com/?q=17.485656,78.392005" target="_blank" class="contact-item">
+      <div class="contact-icon ci-map">📍</div>
+      <div class="contact-text">
+        <strong>Open in Google Maps</strong>
+        <span>Get directions to our office</span>
+      </div>
+      <span class="ci-arrow">›</span>
+    </a>
+
+    <div class="contact-item" style="cursor:default;">
+      <div class="contact-icon ci-addr">🏢</div>
+      <div class="contact-text">
+        <strong>Office Address</strong>
+        <span>MIG-76/3, 3rd Phase, KPHB Colony, Hyderabad</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Map -->
+  <div class="map-wrap">
+    <iframe
+      src="https://maps.google.com/maps?q=17.485656,78.392005&z=16&output=embed"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Yash Business Advisors Location">
+    </iframe>
+  </div>
+
+  <!-- CTA -->
+  <div style="text-align:center; margin-top:28px;">
+    <p style="font-size:13px; color:var(--white-50); margin-bottom:16px;">Ready to grow your business with expert support?</p>
+    <a href="https://wa.me/917981248628?text=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services." class="btn-primary" target="_blank">Get Free Consultation →</a>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo-small">YASH</div>
+  <div class="tagline">Business Advisors</div>
+  <p style="font-size:12px; color:var(--white-80); line-height:1.6;">Your trusted partner for all business compliance, accounting & advisory needs in Hyderabad.</p>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <p class="copy">© 2025 Yash Business Advisors. All rights reserved.<br/>MIG-76/3, KPHB Colony, Hyderabad</p>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/917981248628?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20your%20services." target="_blank" class="fab-wa" title="Chat on WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
